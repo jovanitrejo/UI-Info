@@ -8,12 +8,12 @@
 import Foundation
 
 class Place: Codable, Identifiable, Hashable, Equatable {
-    let id: UUID
-    let name: String
-    let description: String
-    let image: String
-    let latitude: Double
-    let longitude: Double
+    internal var id: UUID
+    private var name: String
+    private var description: String
+    private var image: String
+    private var latitude: Double
+    private var longitude: Double
     
     init(name: String, description: String, image: String, latitude: Double, longitude: Double) {
         self.id = UUID()
@@ -57,5 +57,25 @@ class Place: Codable, Identifiable, Hashable, Equatable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+    
+    func getName() -> String {
+        return self.name
+    }
+    
+    func getDescription() -> String {
+        return self.description
+    }
+    
+    func getImage() -> String {
+        return self.image
+    }
+    
+    func getLatitude() -> Double {
+        return self.latitude
+    }
+    
+    func getLongitude() -> Double {
+        return self.longitude
     }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 class CampusCategory: Codable, Identifiable {
-    let id: UUID
-    let category: String
-    let places: [Place]
+    internal let id: UUID
+    private let category: String
+    private let places: [Place]
     
     init(category: String, places: [Place]) {
         self.id = UUID()
@@ -34,5 +34,13 @@ class CampusCategory: Codable, Identifiable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(category, forKey: .category)
         try container.encode(places, forKey: .places)
+    }
+    
+    func getCategory() -> String {
+        return self.category
+    }
+    
+    func getPlaces() -> [Place] {
+        return self.places
     }
 }

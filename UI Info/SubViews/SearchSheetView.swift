@@ -18,14 +18,14 @@ struct SearchSheetView: View {
         } else {
             let lowercasedSearchText = searchText.lowercased()
             return pointsOfInterests.map { category in
-                let filteredPlaces = category.places.filter { place in
-                    let nameMatches = containsCharactersInOrder(name: place.name, searchText: lowercasedSearchText)
-                    let acronymMatches = generateAcronyms(from: place.name).contains { $0.lowercased().contains(lowercasedSearchText) }
+                let filteredPlaces = category.getPlaces().filter { place in
+                    let nameMatches = containsCharactersInOrder(name: place.getName(), searchText: lowercasedSearchText)
+                    let acronymMatches = generateAcronyms(from: place.getName()).contains { $0.lowercased().contains(lowercasedSearchText) }
                     return nameMatches || acronymMatches
                 }
-                return CampusCategory(category: category.category, places: filteredPlaces)
+                return CampusCategory(category: category.getCategory(), places: filteredPlaces)
             }.filter { category in
-                !category.places.isEmpty
+                !category.getPlaces().isEmpty
             }
         }
     }
@@ -43,11 +43,11 @@ struct SearchSheetView: View {
             .padding(.top, 20)
             ScrollView {
                 ForEach(filteredPointsOfInterests) { category in
-                    ForEach(category.places) { place in
+                    ForEach(category.getPlaces()) { place in
                         Button(action: {
                             selectedPlace = place
                         }, label: {
-                            SingleSearchResultView(categoryImageString: category.category, placeName: place.name)
+                            SingleSearchResultView(categoryImageString: category.getCategory(), placeName: place.getName())
                         })
                         .buttonStyle(PlainButtonStyle())
                         Divider()

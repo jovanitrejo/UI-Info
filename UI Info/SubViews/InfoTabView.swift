@@ -23,13 +23,13 @@ struct InfoTabView: View {
             ScrollView {
                 ForEach(sections) { section in
                     HStack {
-                        Text(section.section)
+                        Text(section.getSection())
                             .font(.headline)
                         Spacer()
                     }
                     .padding(.bottom, 5)
                     HStack {
-                        Text(section.text)
+                        Text(section.getText())
                             .multilineTextAlignment(.leading)
                         Spacer()
                     }

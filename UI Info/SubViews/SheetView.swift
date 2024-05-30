@@ -13,11 +13,11 @@ struct SheetView: View {
     let selectedCampus: String
     var body: some View {
         if selectedPlace == nil {
-            SearchSheetView(pointsOfInterests: campus?.pointsOfInterest ?? mockCategories, selectedPlace: $selectedPlace)
+            SearchSheetView(pointsOfInterests: campus?.getPointsOfInterest() ?? mockCategories, selectedPlace: $selectedPlace)
                 .presentationBackgroundInteraction(.enabled)
                 .presentationDetents([.large])
         } else {
-            SelectedPlaceInformationSheet(selectedPlace: selectedPlace!, imageName: getURLDirectory(selectedCampus: selectedCampus) + selectedPlace!.image)
+            SelectedPlaceInformationSheet(selectedPlace: selectedPlace!, imageName: getURLDirectory(selectedCampus: selectedCampus) + selectedPlace!.getImage())
                 .presentationDetents([.fraction(0.5), .fraction(0.7), .fraction(0.99)])
         }
     }

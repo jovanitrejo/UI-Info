@@ -15,7 +15,7 @@ struct LandmarksTabView: View {
         VStack {
             HStack {
                 Text("Points of Interests")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title)
                     .fontWeight(.bold)
                 Spacer()
             }
@@ -25,20 +25,20 @@ struct LandmarksTabView: View {
                 ForEach(campusCategories) { category in
                     VStack {
                         HStack {
-                            Text(category.category)
+                            Text(category.getCategory())
                                 .font(.title2)
                                 .padding(.leading)
                             Spacer()
                         }
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                ForEach(Array(category.places.enumerated()), id: \.element.id) { index, place in
+                                ForEach(Array(category.getPlaces().enumerated()), id: \.element.id) { index, place in
                                     Button(action: {
                                         selectedPlace = place
                                     }, label: {
-                                        SingularPlaceTile(place: place.name, imageName: getURLDirectory(selectedCampus: selectedCampus) + place.image)
+                                        SingularPlaceTile(place: place.getName(), imageName: getURLDirectory(selectedCampus: selectedCampus) + place.getImage())
                                             .padding(.leading, index == 0 ? 16 : 0) // Padding for the first element
-                                            .padding(.trailing, index == category.places.count - 1 ? 16 : 0) // Padding for the last element
+                                            .padding(.trailing, index == category.getPlaces().count - 1 ? 16 : 0) // Padding for the last element
                                     })
                                 }
                             }

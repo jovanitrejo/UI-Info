@@ -11,7 +11,6 @@
 		0DBA597F2C090CD3000A1FE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DBA597E2C090CD3000A1FE3 /* Preview Assets.xcassets */; };
 		0DBA59862C090D3E000A1FE3 /* UI_InfoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA59852C090D3E000A1FE3 /* UI_InfoApp.swift */; };
 		0DBA59A62C090D46000A1FE3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA59872C090D46000A1FE3 /* ContentView.swift */; };
-		0DBA59A72C090D46000A1FE3 /* DetermineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA59882C090D46000A1FE3 /* DetermineButton.swift */; };
 		0DBA59A82C090D46000A1FE3 /* DetermineIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA59892C090D46000A1FE3 /* DetermineIcon.swift */; };
 		0DBA59A92C090D46000A1FE3 /* GetImageURLDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA598A2C090D46000A1FE3 /* GetImageURLDirectory.swift */; };
 		0DBA59AB2C090D46000A1FE3 /* LoadCampusDataFromS3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBA598C2C090D46000A1FE3 /* LoadCampusDataFromS3.swift */; };
@@ -47,7 +46,6 @@
 		0DBA597E2C090CD3000A1FE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0DBA59852C090D3E000A1FE3 /* UI_InfoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI_InfoApp.swift; sourceTree = "<group>"; };
 		0DBA59872C090D46000A1FE3 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0DBA59882C090D46000A1FE3 /* DetermineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetermineButton.swift; sourceTree = "<group>"; };
 		0DBA59892C090D46000A1FE3 /* DetermineIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetermineIcon.swift; sourceTree = "<group>"; };
 		0DBA598A2C090D46000A1FE3 /* GetImageURLDirectory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageURLDirectory.swift; sourceTree = "<group>"; };
 		0DBA598C2C090D46000A1FE3 /* LoadCampusDataFromS3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCampusDataFromS3.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 		0DBA598E2C090D46000A1FE3 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
-				0DBA59882C090D46000A1FE3 /* DetermineButton.swift */,
 				0DBA59892C090D46000A1FE3 /* DetermineIcon.swift */,
 				0DBA598A2C090D46000A1FE3 /* GetImageURLDirectory.swift */,
 				0DBA598C2C090D46000A1FE3 /* LoadCampusDataFromS3.swift */,
@@ -269,7 +266,6 @@
 				0DBA59B52C090D46000A1FE3 /* InfoTabView.swift in Sources */,
 				0DBA59BD2C090D46000A1FE3 /* UIButtonView.swift in Sources */,
 				0DBA59AC2C090D46000A1FE3 /* UpdateSelectedCampus.swift in Sources */,
-				0DBA59A72C090D46000A1FE3 /* DetermineButton.swift in Sources */,
 				0DBA59B92C090D46000A1FE3 /* SelectedPlaceInformationSheet.swift in Sources */,
 				0DBA59AB2C090D46000A1FE3 /* LoadCampusDataFromS3.swift in Sources */,
 				0DBA59B22C090D46000A1FE3 /* MockCampusData.swift in Sources */,

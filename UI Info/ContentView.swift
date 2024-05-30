@@ -26,19 +26,19 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            MapTabView(showSearchSheet: $showSearchSheet, position: $region, selectedPlace: $selectedPlace, places: campus?.pointsOfInterest ?? mockCategories)
+            MapTabView(showSearchSheet: $showSearchSheet, position: $region, selectedPlace: $selectedPlace, places: campus?.getPointsOfInterest() ?? mockCategories)
                 .tabItem {
                     Image(systemName: "map")
                     Text("Map")
                 }
                 .tag("Map")
-            LandmarksTabView(campusCategories: campus?.pointsOfInterest ?? mockCategories, selectedCampus: selectedCampus, selectedPlace: $selectedPlace)
+            LandmarksTabView(campusCategories: campus?.getPointsOfInterest() ?? mockCategories, selectedCampus: selectedCampus, selectedPlace: $selectedPlace)
                 .tabItem {
                     Image(systemName: "mappin.circle")
                     Text("Landmarks")
                 }
                 .tag("Landmarks")
-            InfoTabView(sections: campus?.info ?? mockInfo, selectedCampus: selectedCampus)
+            InfoTabView(sections: campus?.getInfo() ?? mockInfo, selectedCampus: selectedCampus)
                 .tabItem {
                     Image(systemName: "info.circle")
                     Text("Info")
@@ -57,14 +57,14 @@ struct ContentView: View {
         .onChange(of: selectedPlace) {
             if selectedPlace != nil {
                 showSearchSheet = true
-                region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: selectedPlace!.latitude - 0.001, longitude: selectedPlace!.longitude), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: selectedPlace!.getLatitude() - 0.001, longitude: selectedPlace!.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
                 selectedTab = "Map"
             }
         }
         .sheet(isPresented: $showSearchSheet, onDismiss: {
             showSearchSheet = false
             selectedPlace = nil
-            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: campus!.latitude, longitude: campus!.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: campus!.getLatitude(), longitude: campus!.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
             configureTabBarAppearance()
         }) {
             SheetView(selectedPlace: $selectedPlace, campus: $campus, selectedCampus: selectedCampus)
@@ -80,7 +80,7 @@ struct ContentView: View {
                 DispatchQueue.main.async {
                     self.campus = campus
                     self.imageDirectory = getURLDirectory(selectedCampus: selectedCampus)
-                    self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: campus.latitude, longitude: campus.longitude), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+                    self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: campus.getLatitude(), longitude: campus.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")

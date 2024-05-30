@@ -50,7 +50,7 @@ struct SelectedPlaceInformationSheet: View {
             if showDetails {
                 VStack {
                     HStack {
-                        Text(selectedPlace.name)
+                        Text(selectedPlace.getName())
                             .font(.title)
                             .fontWeight(.heavy)
                             .foregroundColor(Color.white)
@@ -61,7 +61,7 @@ struct SelectedPlaceInformationSheet: View {
                     ScrollView {
                         VStack {
                             HStack {
-                                Text(selectedPlace.description)
+                                Text(selectedPlace.getDescription())
                                     .multilineTextAlignment(.leading)
                                 Spacer()
                             }
@@ -72,9 +72,9 @@ struct SelectedPlaceInformationSheet: View {
                         .background(.regularMaterial)
                         .cornerRadius(10)
                         Button(action: {
-                            let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: selectedPlace.latitude, longitude: selectedPlace.longitude))
+                            let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: selectedPlace.getLatitude(), longitude: selectedPlace.getLongitude()))
                             let landmark = MKMapItem(placemark: placemark)
-                            landmark.name = selectedPlace.name
+                            landmark.name = selectedPlace.getName()
                             landmark.openInMaps()
                         }) {
                             ColoredButtonView(color: Color.blue, text: "Open in Maps")

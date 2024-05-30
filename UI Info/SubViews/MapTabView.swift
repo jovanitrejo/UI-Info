@@ -54,10 +54,6 @@ struct MapTabView: View {
             }
         }
     }
-    
-    func determineCameraPos() -> Void {
-        
-    }
 }
 
 struct MapTabView_Previews: PreviewProvider {

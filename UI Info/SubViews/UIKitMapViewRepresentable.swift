@@ -67,12 +67,12 @@ struct MapView: UIViewRepresentable {
         var annotations = [CustomPointAnnotation]()
         
         for category in categories {
-            for place in category.places {
+            for place in category.getPlaces() {
                 let annotation = CustomPointAnnotation()
-                annotation.title = place.name
-                annotation.coordinate = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                annotation.title = place.getName()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: place.getLatitude(), longitude: place.getLongitude())
                 annotation.place = place
-                let annotationCustomizations = determineIcon(categoryName: category.category)
+                let annotationCustomizations = determineIcon(categoryName: category.getCategory())
                 annotation.glyphImage = UIImage(systemName: annotationCustomizations.0)
                 annotation.markerTintColor = UIColor(annotationCustomizations.1)
                 annotations.append(annotation)
@@ -82,7 +82,7 @@ struct MapView: UIViewRepresentable {
         uiView.addAnnotations(annotations)
         
         if let selectedPlace = selectedPlace {
-            if let annotation = annotations.first(where: {$0.place?.name == selectedPlace.name}) {
+            if let annotation = annotations.first(where: {$0.place?.getName() == selectedPlace.getName()}) {
                 uiView.selectAnnotation(annotation, animated: true)
             }
         }

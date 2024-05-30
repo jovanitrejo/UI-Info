@@ -8,9 +8,9 @@
 import Foundation
 
 class Section: Codable, Identifiable {
-    var id: UUID
-    var section: String
-    var text: String
+    internal var id: UUID
+    private var section: String
+    private var text: String
     
     init(id: UUID = UUID(), section: String, text: String) {
         self.id = id
@@ -34,5 +34,13 @@ class Section: Codable, Identifiable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(section, forKey: .section)
         try container.encode(text, forKey: .text)
+    }
+    
+    func getSection() -> String {
+        return self.section
+    }
+    
+    func getText() -> String {
+        return self.text
     }
 }
