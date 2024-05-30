@@ -29,7 +29,7 @@ struct ContentViewWrapper: View {
             if selectedCampus != "none" {
                 showContent = true // Directly set to true without animation if a campus is already selected
             } else {
-                withAnimation(.easeInOut(duration: 0.4)) {
+                withAnimation(.easeInOut(duration: 0.3)) {
                     showContent = selectedCampus != "none"
                 }
             }

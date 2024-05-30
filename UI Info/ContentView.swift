@@ -15,61 +15,72 @@ struct ContentView: View {
     @State private var imageDirectory: String?
     @State private var region: MKCoordinateRegion
     @State private var selectedPlace: Place? = nil
-    @State private var placeCategory: String? = nil
     @State private var selectedTab: String = "Map"
+    var imageURLPath: String
     
     init(selectedCampus: String, region: MKCoordinateRegion) {
         self.selectedCampus = selectedCampus
         self._region = State(initialValue: region)
+        self.imageURLPath = getURLDirectory(selectedCampus: selectedCampus)
     }
     
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            MapTabView(showSearchSheet: $showSearchSheet, position: $region, selectedPlace: $selectedPlace, places: campus?.getPointsOfInterest() ?? mockCategories)
-                .tabItem {
-                    Image(systemName: "map")
-                    Text("Map")
+        Group {
+            if campus == nil {
+                ProgressView()
+                    .ignoresSafeArea()
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+            } else {
+                TabView(selection: $selectedTab) {
+                    MapTabView(showSearchSheet: $showSearchSheet, position: $region, selectedPlace: $selectedPlace, places: campus!.getPointsOfInterest())
+                        .tabItem {
+                            Image(systemName: "map")
+                            Text("Map")
+                        }
+                        .tag("Map")
+                    LandmarksTabView(campusCategories: campus!.getPointsOfInterest(), imageURLPath: imageURLPath, selectedPlace: $selectedPlace)
+                        .tabItem {
+                            Image(systemName: "mappin.circle")
+                            Text("Landmarks")
+                        }
+                        .tag("Landmarks")
+                    InfoTabView(sections: campus!.getInfo(), selectedCampus: selectedCampus)
+                        .tabItem {
+                            Image(systemName: "info.circle")
+                            Text("Info")
+                        }
+                        .tag("Info")
                 }
-                .tag("Map")
-            LandmarksTabView(campusCategories: campus?.getPointsOfInterest() ?? mockCategories, selectedCampus: selectedCampus, selectedPlace: $selectedPlace)
-                .tabItem {
-                    Image(systemName: "mappin.circle")
-                    Text("Landmarks")
+                .onChange(of: selectedCampus) {
+                    if selectedCampus != "none" {
+                        loadData()
+                    }
                 }
-                .tag("Landmarks")
-            InfoTabView(sections: campus?.getInfo() ?? mockInfo, selectedCampus: selectedCampus)
-                .tabItem {
-                    Image(systemName: "info.circle")
-                    Text("Info")
+                .onChange(of: selectedPlace) {
+                    if selectedPlace != nil {
+                        showSearchSheet = true
+                        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: selectedPlace!.getLatitude() - 0.001, longitude: selectedPlace!.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+                        selectedTab = "Map"
+                    }
                 }
-                .tag("Info")
+                .sheet(isPresented: $showSearchSheet, onDismiss: {
+                    showSearchSheet = false
+                    selectedPlace = nil
+                    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: campus!.getLatitude(), longitude: campus!.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+                    configureTabBarAppearance()
+                }) {
+                    SheetView(selectedPlace: $selectedPlace, campus: $campus, selectedCampus: selectedCampus)
+                        .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.5)))
+                        .edgesIgnoringSafeArea(.bottom)
+                }
+            }
         }
-        .onAppear {
-            loadData()
-            configureTabBarAppearance()
-        }
-        .onChange(of: selectedCampus) {
-            if selectedCampus != "none" {
+        .onAppear() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 loadData()
+                configureTabBarAppearance()
             }
-        }
-        .onChange(of: selectedPlace) {
-            if selectedPlace != nil {
-                showSearchSheet = true
-                region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: selectedPlace!.getLatitude() - 0.001, longitude: selectedPlace!.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
-                selectedTab = "Map"
-            }
-        }
-        .sheet(isPresented: $showSearchSheet, onDismiss: {
-            showSearchSheet = false
-            selectedPlace = nil
-            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: campus!.getLatitude(), longitude: campus!.getLongitude()), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-            configureTabBarAppearance()
-        }) {
-            SheetView(selectedPlace: $selectedPlace, campus: $campus, selectedCampus: selectedCampus)
-                .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.5)))
-                .edgesIgnoringSafeArea(.bottom)
         }
     }
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LandmarksTabView: View {
     var campusCategories: [CampusCategory]
-    var selectedCampus: String
+    var imageURLPath: String
     @Binding var selectedPlace: Place?
     var body: some View {
         VStack {
@@ -36,7 +36,7 @@ struct LandmarksTabView: View {
                                     Button(action: {
                                         selectedPlace = place
                                     }, label: {
-                                        SingularPlaceTile(place: place.getName(), imageName: getURLDirectory(selectedCampus: selectedCampus) + place.getImage())
+                                        SingularPlaceTile(place: place.getName(), imageName: imageURLPath + place.getImage())
                                             .padding(.leading, index == 0 ? 16 : 0) // Padding for the first element
                                             .padding(.trailing, index == category.getPlaces().count - 1 ? 16 : 0) // Padding for the last element
                                     })
@@ -53,5 +53,5 @@ struct LandmarksTabView: View {
 }
 
 #Preview {
-    LandmarksTabView(campusCategories: mockCategories, selectedCampus: "uic", selectedPlace: .constant(nil))
+    LandmarksTabView(campusCategories: mockCategories, imageURLPath: getURLDirectory(selectedCampus: "uic"), selectedPlace: .constant(nil))
 }

@@ -26,5 +26,5 @@ struct WelcomeScreenButtonView: View {
 }
 
 #Preview {
-    WelcomeScreenButtonView(imageString: "uislogo", campusName: "University of Illinois Urbana-\nChampaign")
+    WelcomeScreenButtonView(imageString: "uislogo", campusName: "University of Illinois Springfield")
 }

@@ -107,11 +107,12 @@
 			children = (
 				0DBA59852C090D3E000A1FE3 /* UI_InfoApp.swift */,
 				0DBA59872C090D46000A1FE3 /* ContentView.swift */,
+				0DBA59982C090D46000A1FE3 /* ContentViewWrapper.swift */,
+				0DBA59A52C090D46000A1FE3 /* WelcomeScreen.swift */,
 				0DBA59942C090D46000A1FE3 /* DataStructures */,
 				0DBA598E2C090D46000A1FE3 /* Functions */,
 				0DBA59962C090D46000A1FE3 /* MockData */,
 				0DBA59A42C090D46000A1FE3 /* SubViews */,
-				0DBA59A52C090D46000A1FE3 /* WelcomeScreen.swift */,
 				0DBA597B2C090CD3000A1FE3 /* Assets.xcassets */,
 				0DBA597D2C090CD3000A1FE3 /* Preview Content */,
 			);
@@ -161,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				0DBA59972C090D46000A1FE3 /* ColoredButtonView.swift */,
-				0DBA59982C090D46000A1FE3 /* ContentViewWrapper.swift */,
 				0DBA59992C090D46000A1FE3 /* InfoTabView.swift */,
 				0DBA599A2C090D46000A1FE3 /* LandmarksTabView.swift */,
 				0DBA599B2C090D46000A1FE3 /* MapTabView.swift */,
